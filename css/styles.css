@@ -1,24 +1,24 @@
+/* General Reset */
 * {
-  padding: 0;
   margin: 0;
-  box-sizing: border-box; /* ✅ Added to prevent unwanted spacing */
-}
-
-body {
-  font-family: sans-serif;
-  background-color: white;
-  color: black;
+  padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+/* Offer Bar */
 #start {
   padding: 15px;
   background-color: #a3d1c6;
   text-align: center;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 20px;
 }
 
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -42,10 +42,6 @@ body {
   list-style: none;
   display: flex;
   gap: 20px;
-}
-
-.nav-links li {
-  display: inline-block; /* ✅ Ensures no extra spacing */
 }
 
 .nav-links li a {
@@ -89,9 +85,53 @@ body {
   color: #174d32;
 }
 
+/* Horizontal Line */
 .custom-hr {
   border: none;
-  height: 2px; /* Thickness of the line */
-  background-color: #174d32; /* Green color similar to the logo */
-  margin: 5px 0; /* Spacing */
+  height: 2px;
+  background-color: #174d32;
+  margin: 10px 0;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  padding: 50px;
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-content h1 {
+  font-size: 2.7rem;
+  color: black;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #444;
+  margin-top: 10px;
+}
+
+.cta-button {
+  background-color: #2e8b57;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #174d32;
+}
+
+.hero-image img {
+  max-width: 100%;
+  border-radius: 15px;
 }
