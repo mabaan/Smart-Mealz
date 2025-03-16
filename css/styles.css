@@ -478,6 +478,164 @@ body {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Motivational Quote Section */
+.motivational-quote {
+  background-color: #a3d1c6;
+  padding: 30px 10%;
+  text-align: center;
+}
+
+.quote-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.quote-text {
+  font-size: 1.8rem;
+  font-style: italic;
+  color: #174d32;
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+
+.quote-author {
+  font-size: 1.2rem;
+  color: #174d32;
+  font-weight: bold;
+}
+
+/* Footer Section */
+/* Footer Styles */
+.footer {
+  background-color: #174d32;
+  color: white;
+  padding: 50px 10%;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #a3d1c6;
+}
+
+.footer-section p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #a3d1c6;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.newsletter-form button {
+  background-color: #a3d1c6;
+  color: #174d32;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #8bb8a8;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-icon img {
+  width: 34px;
+  height: 34px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover img {
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #a3d1c6;
+}
+
+.footer-bottom p {
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.footer-bottom ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-bottom ul li a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom ul li a:hover {
+  color: #a3d1c6;
+}
+
 /* ========== RESPONSIVE DESIGN ========== */
 
 /* Tablet View (768px and below) */
@@ -527,6 +685,36 @@ body {
   .fit-image {
     order: -1; /* Move image above text on smaller screens */
   }
+
+  .quote-text {
+    font-size: 1.5rem;
+  }
+
+  .quote-author {
+    font-size: 1rem;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    max-width: 100%;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
 }
 
 /* Mobile View (480px and below) */
@@ -549,6 +737,14 @@ body {
   }
 
   .feature-card p {
+    font-size: 0.9rem;
+  }
+
+  .quote-text {
+    font-size: 1.2rem;
+  }
+
+  .quote-author {
     font-size: 0.9rem;
   }
 }
