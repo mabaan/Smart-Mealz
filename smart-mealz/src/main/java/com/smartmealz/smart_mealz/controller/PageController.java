@@ -1,4 +1,4 @@
-package com.smartmealz.smart_mealz;
+package com.smartmealz.smart_mealz.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

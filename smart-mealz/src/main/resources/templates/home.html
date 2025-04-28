@@ -29,9 +29,38 @@
       </ul>
       <div class="nav-buttons">
         <button class="download-btn">Download App</button>
-        <a href="#" class="login-link">Log in</a>
+        <!-- <a href="#" class="login-link">Log in</a> -->
+        <button id="openLogin">Login</button>
+        <button id="openSignup">Sign Up</button>
       </div>
     </nav>
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="closeLogin">&times;</span>
+          <h2>Login</h2>
+          <form action="/login" method="post">
+              <input type="email" name="email" placeholder="Email" required><br>
+              <input type="password" name="password" placeholder="Password" required><br>
+              <input type="submit" value="Login">
+          </form>
+      </div>
+    </div>
+
+  <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="closeSignup">&times;</span>
+          <h2>Sign Up</h2>
+          <form action="/signup" method="post">
+              <input type="email" name="email" placeholder="Email" required><br>
+              <input type="password" name="password" placeholder="Password" required><br>
+              <input type="submit" value="Sign Up">
+          </form>
+      </div>
+    </div>
+
+
+    
 
     <!-- Horizontal Line -->
     <hr class="custom-hr" />

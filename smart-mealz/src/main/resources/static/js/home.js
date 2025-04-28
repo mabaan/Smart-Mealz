@@ -63,4 +63,44 @@ document.addEventListener('DOMContentLoaded', function() {
     if (statsSection) {
       observer.observe(statsSection);
     }
+
+    const loginModal = document.getElementById('loginModal');
+    const signupModal = document.getElementById('signupModal');
+    const openLogin = document.getElementById('openLogin');
+    const openSignup = document.getElementById('openSignup');
+    const closeLogin = document.getElementById('closeLogin');
+    const closeSignup = document.getElementById('closeSignup');
+
+    if (openLogin && loginModal) {
+        openLogin.onclick = function() {
+            loginModal.style.display = "block";
+        };
+    }
+
+    if (openSignup && signupModal) {
+        openSignup.onclick = function() {
+            signupModal.style.display = "block";
+        };
+    }
+
+    if (closeLogin && loginModal) {
+        closeLogin.onclick = function() {
+            loginModal.style.display = "none";
+        };
+    }
+
+    if (closeSignup && signupModal) {
+        closeSignup.onclick = function() {
+            signupModal.style.display = "none";
+        };
+    }
+
+    window.onclick = function(event) {
+        if (event.target == loginModal) {
+            loginModal.style.display = "none";
+        }
+        if (event.target == signupModal) {
+            signupModal.style.display = "none";
+        }
+    };
 });
