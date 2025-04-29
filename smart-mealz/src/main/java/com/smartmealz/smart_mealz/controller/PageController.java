@@ -20,4 +20,12 @@ public class PageController {
     public String checkout() {
         return "checkout";      // renders templates/checkout.html
     }
+
+  
+    
+        @GetMapping("/bodyassessment")          // <-- URL user clicks
+        public String bodyassessment() {
+            return "bodyassessment";            // <-- templates/bodyassessment.html
+        }
+    
 }
