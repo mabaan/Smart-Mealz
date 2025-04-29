@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartMealz - Body Assessment</title>
+    <link rel="stylesheet" href="/smart-mealz/src/main/resources/static/css/bodyassessment.css"/>
+    <script src="jquery-2.1.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Page Loading -->
+    <div class="loader-wrapper">
+      <span class="loader">
+        <span class="loader-inner"></span>
+      </span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="/smart-mealz/src/main/resources/templates/home.html" class="navbar-brand">SMARTMEALZ</a>
+        
+        <!-- Hamburger menu for mobile -->
+        <button class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <div class="navbar-menu">
+          <ul class="nav-links">
+            <li><a href="/smart-mealz/src/main/resources/templates/home.html">Home</a></li>
+            <li><a href="/smart-mealz/src/main/resources/templates/bodyassessment.html">Body Assessment</a></li>
+            <li><a href="/customize.html">Customize Plan</a></li>
+            <li><a href="/smart-mealz/src/main/resources/templates/selectplan.html">Select Meals</a></li>
+            <li><a href="/smart-mealz/src/main/resources/templates/checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-auth">
+          <a href="/login.html" class="login-btn">Log in</a>
+          <a href="/signin.html" class="sign-btn">Sign in</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- BMI Calculator Section -->
+    <section id="bmi" class="section">
+      <div class="container">
+        <h2>BMI Calculator</h2>
+        <p class="section-description">Calculate your Body Mass Index to understand your body composition.</p>
+        
+        <div class="bmi-calculator">
+          <div class="input-group">
+            <label for="height">Height (cm)</label>
+            <input type="range" id="height" min="100" max="220" value="170" name="height" oninput="updateHeightValue()">
+            <div class="range-values">
+              <span>100 cm</span>
+              <span id="height-value">170 cm</span>
+              <span>220 cm</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="range" id="weight" min="30" max="150" value="70" name="weight" oninput="updateWeightValue()">
+            <div class="range-values">
+              <span>30 kg</span>
+              <span id="weight-value">70 kg</span>
+              <span>150 kg</span>
+            </div>
+          </div>
+
+          <div class="bmi-result">
+            <div class="bmi-meter">
+              <div class="meter-value" id="bmi-value">22.0</div>
+              <div class="meter-label">Your BMI</div>
+            </div>
+            <div class="bmi-category" id="bmi-category">Normal Weight</div>
+            <div class="bmi-scale">
+              <div class="scale-segment underweight"></div>
+              <div class="scale-segment normal"></div>
+              <div class="scale-segment overweight"></div>
+              <div class="scale-segment obese"></div>
+            </div>
+            <div class="scale-labels">
+              <span>Underweight</span>
+              <span>Normal</span>
+              <span>Overweight</span>
+              <span>Obese</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn-primary" name="submitbmi" onclick="submitBMI()">Submit BMI</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BMI Report Modal -->
+    <div id="bmi-report-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('bmi-report-modal')">&times;</span>
+        <h2>BMI Report</h2>
+        <div class="report-content">
+          <div class="report-item">
+            <span class="report-label">Your BMI:</span>
+            <span class="report-value" id="report-bmi">22.0</span>
+          </div>
+          <div class="report-item">
+            <span class="report-label">Category:</span>
+            <span class="report-value" id="report-category">Normal Weight</span>
+          </div>
+          <div class="report-item">
+            <span class="report-label">Health Status:</span>
+            <span class="report-value" id="report-status">You are within the normal weight range.</span>
+          </div>
+          <div class="report-suggestions" id="bmi-suggestions">
+            <h3>Recommendations:</h3>
+            <ul id="bmi-recommendations">
+              <li>Maintain a balanced diet with plenty of fruits and vegetables</li>
+              <li>Engage in regular physical activity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calorie Tracker Section -->
+    <section id="calories" class="section">
+      <div class="container">
+        <h2>Calorie Tracker</h2>
+        <p class="section-description">Track your daily calorie intake and monitor your progress.</p>
+
+        <div class="calorie-calculator">
+          <div class="profile-inputs">
+            <div class="input-row">
+              <div class="input-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="30" min="15" max="100">
+              </div>
+              <div class="input-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-group">
+                <label for="activity">Activity Level</label>
+                <select id="activity" name="activity">
+                  <option value="sedentary">Sedentary</option>
+                  <option value="light">Light Exercise</option>
+                  <option value="moderate">Moderate Exercise</option>
+                  <option value="active">Very Active</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="goal">Goal</label>
+                <select id="goal" name="goal">
+                  <option value="lose">Lose Weight</option>
+                  <option value="maintain">Maintain Weight</option>
+                  <option value="gain">Gain Weight</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="calorie-results">
+            <div class="result-card">
+              <div class="result-label">Daily Calories</div>
+              <div class="result-value" id="daily-calories" name="daily-calories">2000</div>
+            </div>
+            
+            <div class="food-tracker">
+              <h3>Today's Food</h3>
+              <div class="add-food">
+                <input type="text" id="food-name" name="food-name" placeholder="Food name">
+                <input type="number" id="food-calories" name="food-calories" placeholder="Calories">
+                <button name="add-food" onclick="addFood()">Add</button>
+              </div>
+              <div class="food-list" id="food-list"></div>
+              <div class="calorie-progress">
+                <div class="progress-bar">
+                  <div class="progress" id="calorie-progress"></div>
+                </div>
+                <div class="progress-labels">
+                  <span id="calories-eaten" name="calories-eaten">0 eaten</span>
+                  <span id="calories-remaining" name="calories-remaining">2000 remaining</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn-primary" name="submit-calories" onclick="submitCalories()">Submit Calorie Data</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calorie Report Modal -->
+    <div id="calorie-report-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('calorie-report-modal')">&times;</span>
+        <h2>Calorie Report</h2>
+        <div class="report-content">
+          <div class="report-item">
+            <span class="report-label">Daily Calorie Goal:</span>
+            <span class="report-value" id="report-goal">2000</span>
+          </div>
+          <div class="report-item">
+            <span class="report-label">Calories Consumed:</span>
+            <span class="report-value" id="report-consumed">0</span>
+          </div>
+          <div class="report-item">
+            <span class="report-label">Remaining Calories:</span>
+            <span class="report-value" id="report-remaining">2000</span>
+          </div>
+          <div class="report-chart">
+            <canvas id="calorie-chart"></canvas>
+          </div>
+          <div class="report-suggestions">
+            <h3>Dietary Suggestions:</h3>
+            <ul id="calorie-recommendations">
+              <li>Focus on nutrient-dense foods to meet your calorie goals</li>
+              <li>Include a balance of protein, carbs, and healthy fats</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meal Plan Suggestion Section -->
+    <section id="meal-plan" class="section">
+      <div class="container">
+        <h2>Personalized Meal Suggestion</h2>
+        <p class="section-description">Get meal suggestions based on your BMI and calorie needs.</p>
+
+        <div class="meal-suggestions">
+          <div class="input-group">
+            <label for="dietary-preference">Dietary Preference</label>
+            <select id="dietary-preference" name="dietary-preference">
+              <option value="any">No Preference</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="keto">Keto</option>
+              <option value="gluten-free">Gluten-Free</option>
+            </select>
+          </div>
+          
+          <div class="meal-plan-result" id="meal-plan-result">
+            <div class="meal-category">
+              <h3>Breakfast</h3>
+              <ul class="meal-list">
+                <li class="meal-item" name="breakfast-suggestion">Loading suggestions...</li>
+              </ul>
+            </div>
+            <div class="meal-category">
+              <h3>Lunch</h3>
+              <ul class="meal-list">
+                <li class="meal-item" name="lunch-suggestion">Loading suggestions...</li>
+              </ul>
+            </div>
+            <div class="meal-category">
+              <h3>Dinner</h3>
+              <ul class="meal-list">
+                <li class="meal-item" name="dinner-suggestion">Loading suggestions...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn-primary" id="generate-meal-plan" name="generate-meal-plan">Generate Meal Suggestion</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Button -->
+    <button class="top" onClick="scrollToTop()">
+      <img class="top-image" src="/smart-mealz/src/main/resources/static/css/img/up-arrow.png" alt="up arrow">
+      <h3 style="margin-top: 10px;">Top</h3>
+    </button>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-main">
+          <div class="newsletter-section">
+            <h2>New recipes and news in your inbox every month!</h2>
+            <div class="newsletter-form">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="newsletter-input"
+              />
+              <button class="subscribe-button" name="subscribe">Subscribe today</button>
+            </div>
+          </div>
+
+          <div class="footer-content">
+            <div class="footer-section">
+              <h3>About SmartMealz</h3>
+              <ul class="footer-links">
+                <li><a href="/">Who We Are</a></li>
+                <li><a href="/">Our Mission</a></li>
+                <li><a href="/">How It Works</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-section">
+              <h3>Our Services</h3>
+              <ul class="footer-links">
+                <li><a href="/">Meal Plans</a></li>
+                <li><a href="/">Nutrition Guide</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-bottom-content">
+            <p class="copyright">&copy; 2025 SmartMealz. All rights reserved.</p>
+            <div class="translate-container">
+              <div id="google_translate_element"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="/js/pageload.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/hamburger.js"></script>
+    <script src="/js/backtotop.js"></script>
+    <script src="/js/bmi.js"></script>
+    <script src="/js/calorie.js"></script>
+    <script src="/js/mealplan.js"></script>
+    <script src="/js/bodyassessment.js"></script>
+    <script type="text/javascript" src="/js/translate.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  </body>
+</html>
