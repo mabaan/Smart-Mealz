@@ -19,7 +19,7 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="home.html" class="navbar-brand">SMARTMEALZ</a>
+        <a th:href="@{/home}" href="/home" class="navbar-brand">SMARTMEALZ</a>
         
         <!-- Hamburger menu for mobile -->
         <button class="hamburger">
@@ -30,11 +30,11 @@
         
         <div class="navbar-menu">
           <ul class="nav-links">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="bodyassessment.html">Body Assessment</a></li>
-            <li><a href="/customize.html">Customize Plan</a></li>
-            <li><a href="selectplan.html">Select Meals</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
+            <li><a th:href="@{/home}" href="/home">Home</a></li>
+            <li><a th:href="@{/bodyassessment}" href="/bodyassessment">Body Assessment</a></li>
+            <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li>
+            <li><a th:href="@{/selectplan}" href="/selectplan">Select Meals</a></li>
+            <li><a th:href="@{/checkout}" href="/checkout">Checkout</a></li>
           </ul>
         </div>
 
