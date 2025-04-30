@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartMealz - Body Assessment</title>
-    <link rel="stylesheet" href="/smart-mealz/src/main/resources/static/css/bodyassessment.css"/>
+    <link rel="stylesheet" href="/css/bodyassessment.css"/>
     <script src="jquery-2.1.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
@@ -19,7 +19,7 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="/smart-mealz/src/main/resources/templates/home.html" class="navbar-brand">SMARTMEALZ</a>
+        <a th:href="@{/home}" href="/home" class="navbar-brand">SMARTMEALZ</a>
         
         <!-- Hamburger menu for mobile -->
         <button class="hamburger">
@@ -30,11 +30,11 @@
         
         <div class="navbar-menu">
           <ul class="nav-links">
-            <li><a href="/smart-mealz/src/main/resources/templates/home.html">Home</a></li>
-            <li><a href="/smart-mealz/src/main/resources/templates/bodyassessment.html">Body Assessment</a></li>
-            <li><a href="/customize.html">Customize Plan</a></li>
-            <li><a href="/smart-mealz/src/main/resources/templates/selectplan.html">Select Meals</a></li>
-            <li><a href="/smart-mealz/src/main/resources/templates/checkout.html">Checkout</a></li>
+            <li><a th:href="@{/home}" href="/home">Home</a></li>
+            <li><a th:href="@{/bodyassessment}" href="/bodyassessment">Body Assessment</a></li>
+            <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li>
+            <li><a th:href="@{/selectplan}" href="/selectplan">Select Meals</a></li>
+            <li><a th:href="@{/checkout}" href="/checkout">Checkout</a></li>
           </ul>
         </div>
 
@@ -284,7 +284,7 @@
 
     <!-- Top Button -->
     <button class="top" onClick="scrollToTop()">
-      <img class="top-image" src="/smart-mealz/src/main/resources/static/css/img/up-arrow.png" alt="up arrow">
+      <img class="top-image" src="/css/img/up-arrow.png" alt="up arrow">
       <h3 style="margin-top: 10px;">Top</h3>
     </button>
 
