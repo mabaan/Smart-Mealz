@@ -11,6 +11,11 @@ public class PageController {
         return "home";          // renders templates/home.html
     }
 
+    @GetMapping("/body-assessment")     // http://localhost:8080/bodyassessment
+    public String bodyAssessmentPage() {
+        return "bodyassessment";        // renders templates/bodyassessment.html
+    }
+
     @GetMapping("/selectplan")  // http://localhost:8080/selectplan
     public String selectPlan() {
         return "selectplan";    // renders templates/selectplan.html
