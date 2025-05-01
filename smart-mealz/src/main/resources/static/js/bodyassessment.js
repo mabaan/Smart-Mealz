@@ -42,4 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('age')) {
     calculateCalories();
   }
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('bmi-entry')) {
+      e.preventDefault();
+  
+      const bmi = e.target.getAttribute('data-bmi');
+      const category = e.target.getAttribute('data-category');
+  
+      alert(`BMI: ${bmi}\nCategory: ${category}`);
+    }
+  });
+  
+  
 });

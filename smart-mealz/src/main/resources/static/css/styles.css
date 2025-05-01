@@ -182,24 +182,6 @@ body {
   gap: 10px;
 }
 
-.nav-auth .login-btn, 
-.nav-auth .sign-btn {
-  text-decoration: none;
-  border: 2px solid #174d32;
-  padding: 8px 16px;
-  border-radius: 5px;
-  color: #174d32;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.nav-auth .login-btn:hover, 
-.nav-auth .sign-btn:hover {
-  background-color: #174d32;
-  color: white;
-}
-
 /* Hamburger menu - hidden by default */
 .hamburger {
   display: none;
@@ -1191,4 +1173,170 @@ body > .skiptranslate,.goog-logo-link,.gskiptranslate,.goog-te-gadget span,.goog
     padding: 6px 12px;
     font-size: 13px;
   }
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .card {
+  animation: popUp 0.3s ease;
+}
+
+/* Smooth pop-up effect */
+@keyframes popUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Card styling */
+.card {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Card header */
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  font-size: 2em;
+  color: #333;
+  text-shadow: 1px 1px #ddd;
+  margin: 0;
+}
+
+/* Card body */
+.card-body {
+  width: 100%;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
+/* Button styling (Login + Sign Up use same button) */
+.login-button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.1em;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #0069d9;
+  box-shadow: 0px 0px 20px rgba(0, 105, 217, 0.6);
+}
+
+.loginandsign{
+  text-decoration: none;
+  border: 2px solid #174d32;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: #174d32;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+}
+
+.loginandsign:hover{
+  background-color: #174d32;
+  color: white;
+  cursor: pointer;
+
+}
+
+#signOutBtn,
+#deleteAccountBtn{
+  text-decoration: none;
+  border: 2px solid #174d32;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: #174d32;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  margin-top: 40px;
+
+}
+
+#signOutBtn:hover,
+#deleteAccountBtn:hover{
+  background-color: #174d32;
+  color: white;
+  cursor: pointer;
+
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 2000;
+}
+.side-panel.open {
+  right: 0;
+}
+.side-panel-content {
+  padding: 20px;
 }

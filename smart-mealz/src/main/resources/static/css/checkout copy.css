@@ -1,0 +1,263 @@
+:root {
+  --primary-color: #00b894;
+  --primary-light: #55efc4;
+  --primary-dark: #00a885;
+  --secondary-color: #0984e3;
+  --text-color: #2d3436;
+  --text-light: #636e72;
+  --background: #f9f9f9;
+  --card-bg: #ffffff;
+  --accent: #fd79a8;
+  --error-color: #d63031;
+  --success-color: #00b894;
+  --border-radius: 8px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  padding: 20px 0;
+  margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Container layout */
+.checkout-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.checkout-form {
+  flex: 1;
+  min-width: 300px;
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.order-summary {
+  width: 380px;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  align-self: flex-start;
+  position: sticky;
+  top: 100px;
+}
+
+/* Headings */
+h2 {
+  margin-bottom: 25px;
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 26px;
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: 10px;
+}
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Meal summary list */
+.meal-summary-list {
+  margin-bottom: 20px;
+}
+
+.meal-plan-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.meal-plan-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.meal-plan-details {
+  flex-grow: 1;
+}
+
+.meal-plan-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.meal-quantity,
+.meal-price,
+.meal-total {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Summary values */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.summary-row div:first-child {
+  color: var(--text-light);
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid #ddd;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Promo code */
+.promo-code {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.promo-code input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+}
+
+.promo-code button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.promo-code button:hover {
+  background-color: var(--primary-dark);
+}
+
+.promo-code button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Form fields */
+input,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 3px var(--primary-light);
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: #ddd;
+  color: var(--text-color);
+}
+
+.btn-secondary:hover {
+  background-color: #ccc;
+}
+
+.error {
+  color: var(--error-color);
+  font-size: 13px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+  .order-summary {
+    width: 100%;
+    position: relative;
+    top: 0;
+  }
+}

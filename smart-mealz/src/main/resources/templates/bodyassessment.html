@@ -19,7 +19,7 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-container">
-        <a th:href="@{/home}" href="/home" class="navbar-brand">SMARTMEALZ</a>
+        <a th:href="@{/}" href="/" class="navbar-brand">SMARTMEALZ</a>
         
         <!-- Hamburger menu for mobile -->
         <button class="hamburger">
@@ -30,7 +30,7 @@
         
         <div class="navbar-menu">
           <ul class="nav-links">
-            <li><a th:href="@{/home}" href="/home">Home</a></li>
+            <li><a th:href="@{/}" href="/">Home</a></li>
             <li><a th:href="@{/bodyassessment}" href="/bodyassessment">Body Assessment</a></li>
             <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li>
             <li><a th:href="@{/selectplan}" href="/selectplan">Select Meals</a></li>
@@ -39,8 +39,8 @@
         </div>
 
         <div class="nav-auth">
-          <a href="/login.html" class="login-btn">Log in</a>
-          <a href="/signin.html" class="sign-btn">Sign up</a>
+          <!-- <a href="/login.html" class="login-btn">Log in</a>
+          <a href="/signin.html" class="sign-btn">Sign up</a> -->
         </div>
       </div>
     </nav>
@@ -324,6 +324,13 @@
           </div>
         </div>
 
+        <form id="bmiForm" action="/submit-bmi" method="post" style="display: none;">
+          <input type="hidden" name="bmi" id="bmi-score">
+          <input type="hidden" name="category" id="bmi-category-hidden">
+        </form>
+        
+        
+
         <div class="footer-bottom">
           <div class="footer-bottom-content">
             <p class="copyright">&copy; 2025 SmartMealz. All rights reserved.</p>
@@ -334,15 +341,17 @@
         </div>
       </div>
     </footer>
-    <script src="/smart-mealz/src/main/resources/static/js/pageload.js"></script>
+    <script src="/js/pageload.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/smart-mealz/src/main/resources/static/js/hamburger.js"></script>
-    <script src="/smart-mealz/src/main/resources/static/js/backtotop.js"></script>
-    <script src="/smart-mealz/src/main/resources/static/js/bmi.js"></script>
-    <script src="/smart-mealz/src/main/resources/static/js/calorie.js"></script>
-    <script src="/smart-mealz/src/main/resources/static/js/mealplan.js"></script>
-    <script src="/smart-mealz/src/main/resources/static/js/bodyassessment.js"></script>
-    <script type="text/javascript" src="/smart-mealz/src/main/resources/static/js/translate.js"></script>
+    <script src="/js/hamburger.js"></script>
+    <script src="/js/backtotop.js"></script>
+    <script src="/js/bmi.js"></script>
+    <script src="/js/calorie.js"></script>
+    <script src="/js/mealplan.js"></script>
+    <script src="/js/bodyassessment.js"></script>
+    <script type="text/javascript" src="/js/translate.js"></script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <button onclick="submitBMI()">Submit</button>
+
   </body>
 </html>

@@ -41,18 +41,85 @@
       <ul class="nav-links">
         <li><a th:href="@{/}" href="/">Home</a></li>
         <li><a th:href="@{/bodyassessment}" href="/bodyassessment">Body Assessment</a></li>
-        <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li>
+        <!-- <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li> -->
         <li><a th:href="@{/selectplan}" href="/selectplan">Select Meals</a></li>
         <li><a th:href="@{/checkout}" href="/checkout">Checkout</a></li>
       </ul>
     </div>
 
-    <div class="nav-auth">
-      <a th:href="@{/login}" href="/login"   class="login-btn">Log in</a>
-      <a th:href="@{/signin}" href="/signin" class="sign-btn">Sign up</a>
+    <div class="nav-buttons">
+      <!-- <a href="#" class="login-link">Log in</a> -->
+      <button class="loginandsign" id="openLogin">Login</button>
+      <button class="loginandsign" id="openSignup">Sign Up</button>
+    
+      <div id="sidePanel" class="side-panel">
+        <div class="side-panel-content">
+          <h3>Your BMI History</h3>
+          <ul id="bmi-history-list">
+            <li th:each="log : ${bmiLogs}">
+              BMI: <span th:text="${log.bmi}">BMI</span>
+              - Height: <span th:text="${log.height}">Height</span>
+              - Weight: <span th:text="${log.weight}">Weight</span>
+            </li>
+          </ul>
+    
+          <button id="deleteAccountBtn">Delete Account</button>
+          <button id="signOutBtn">Sign Out</button>
+        </div>
+      </div>
     </div>
+    
+    
+      
   </div>
 </nav>
+
+<div id="loginModal" class="modal">
+  <div class="card">
+    <div class="card-header">
+      <h2>Login</h2>
+    </div>
+    <div class="card-body">
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="login-button">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="signupModal" class="modal">
+  <div class="card">
+    <div class="card-header">
+      <h2>Sign Up</h2>
+    </div>
+    <div class="card-body">
+      <form action="/signup" method="post">
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" name="password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="login-button">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <!-- Hero Section -->
 <header class="hero">
@@ -298,5 +365,10 @@
 <script th:src="@{/js/backtotop.js}"  src="/js/backtotop.js"></script>
 <script th:src="@{/js/translate.js}"  src="/js/translate.js"></script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script th:src="@{/js/login.js}"  src="/js/login.js"></script>
+
+
+
+
 </body>
 </html>

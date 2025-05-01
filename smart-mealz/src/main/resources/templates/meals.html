@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartMealz – Select Your Meals</title>
+    <link rel="stylesheet" th:href="@{/css/meals.css}" />
+  </head>
+  <body>
+    <!-- Navbar -->
+
+    <!-- Page Header -->
+    <section class="meal-header">
+      <h1>Select Your Meals</h1>
+      <p>Choose your meals and adjust quantity</p>
+    </section>
+
+    <!-- ONE BIG FORM -->
+    <form th:action="@{/submitMeals}" method="post">
+      <!-- High-Protein Meals -->
+      <section class="meal-category">
+        <h2>High-Protein Meals</h2>
+        <div class="meal-row">
+          <div class="meal-card" th:each="meal : ${highProteinMeals}">
+            <img th:src="${meal.image_url}" alt="Meal image" />
+            <div class="meal-info">
+              <h3 th:text="${meal.name}">Meal Name</h3>
+              <p th:text="${meal.description}">Description</p>
+              <div class="macros">
+                <span th:text="'Calories: ' + ${meal.calories}"></span>
+                <span th:text="'Price: AED ' + ${meal.price}"></span>
+              </div>
+
+              <div class="nutrient">
+                <span class="nutrient-circle protein-circle"></span>
+                <span th:text="'Protein: ' + ${meal.protein} + 'g'"
+                  >Protein</span
+                >
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle carbs-circle"></span>
+                <span th:text="'Carbs: ' + ${meal.carbs} + 'g'">Carbs</span>
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle fat-circle"></span>
+                <span th:text="'Fat: ' + ${meal.fat} + 'g'">Fat</span>
+              </div>
+
+              <!-- Quantity Controls -->
+              <div class="quantity-control">
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', -1)'"
+                >
+                  -
+                </button>
+                <span th:id="'qty-' + ${meal.id}">0</span>
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', 1)'"
+                >
+                  +
+                </button>
+              </div>
+
+              <input type="hidden" name="mealIds" th:value="${meal.id}" />
+              <input
+                type="hidden"
+                th:id="'input-qty-' + ${meal.id}"
+                value="0"
+                name="quantities"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Repeat for other categories -->
+      <section class="meal-category">
+        <h2>Balanced Meals</h2>
+        <div class="meal-row">
+          <div class="meal-card" th:each="meal : ${balancedMeals}">
+            <img th:src="${meal.image_url}" alt="Meal image" />
+            <div class="meal-info">
+              <h3 th:text="${meal.name}">Meal Name</h3>
+              <p th:text="${meal.description}">Description</p>
+              <div class="macros">
+                <span th:text="'Calories: ' + ${meal.calories}"></span>
+                <span th:text="'Price: AED ' + ${meal.price}"></span>
+              </div>
+
+              <div class="nutrient">
+                <span class="nutrient-circle protein-circle"></span>
+                <span th:text="'Protein: ' + ${meal.protein} + 'g'"
+                  >Protein</span
+                >
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle carbs-circle"></span>
+                <span th:text="'Carbs: ' + ${meal.carbs} + 'g'">Carbs</span>
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle fat-circle"></span>
+                <span th:text="'Fat: ' + ${meal.fat} + 'g'">Fat</span>
+              </div>
+
+              <div class="quantity-control">
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', -1)'"
+                >
+                  -
+                </button>
+                <span th:id="'qty-' + ${meal.id}">0</span>
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', 1)'"
+                >
+                  +
+                </button>
+              </div>
+
+              <input type="hidden" name="mealIds" th:value="${meal.id}" />
+              <input
+                type="hidden"
+                th:id="'input-qty-' + ${meal.id}"
+                value="0"
+                name="quantities"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="meal-category">
+        <h2>Plant-Based Meals</h2>
+        <div class="meal-row">
+          <div class="meal-card" th:each="meal : ${plantBasedMeals}">
+            <img th:src="${meal.image_url}" alt="Meal image" />
+            <div class="meal-info">
+              <h3 th:text="${meal.name}">Meal Name</h3>
+              <p th:text="${meal.description}">Description</p>
+              <div class="macros">
+                <span th:text="'Calories: ' + ${meal.calories}"></span>
+                <span th:text="'Price: AED ' + ${meal.price}"></span>
+              </div>
+
+              <div class="nutrient">
+                <span class="nutrient-circle protein-circle"></span>
+                <span th:text="'Protein: ' + ${meal.protein} + 'g'"
+                  >Protein</span
+                >
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle carbs-circle"></span>
+                <span th:text="'Carbs: ' + ${meal.carbs} + 'g'">Carbs</span>
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle fat-circle"></span>
+                <span th:text="'Fat: ' + ${meal.fat} + 'g'">Fat</span>
+              </div>
+
+              <div class="quantity-control">
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', -1)'"
+                >
+                  -
+                </button>
+                <span th:id="'qty-' + ${meal.id}">0</span>
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', 1)'"
+                >
+                  +
+                </button>
+              </div>
+
+              <input type="hidden" name="mealIds" th:value="${meal.id}" />
+              <input
+                type="hidden"
+                th:id="'input-qty-' + ${meal.id}"
+                value="0"
+                name="quantities"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="meal-category">
+        <h2>Desserts</h2>
+        <div class="meal-row">
+          <div class="meal-card" th:each="meal : ${dessertMeals}">
+            <img th:src="${meal.image_url}" alt="Meal image" />
+            <div class="meal-info">
+              <h3 th:text="${meal.name}">Meal Name</h3>
+              <p th:text="${meal.description}">Description</p>
+              <div class="macros">
+                <span th:text="'Calories: ' + ${meal.calories}"></span>
+                <span th:text="'Price: AED ' + ${meal.price}"></span>
+              </div>
+
+              <div class="nutrient">
+                <span class="nutrient-circle protein-circle"></span>
+                <span th:text="'Protein: ' + ${meal.protein} + 'g'"
+                  >Protein</span
+                >
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle carbs-circle"></span>
+                <span th:text="'Carbs: ' + ${meal.carbs} + 'g'">Carbs</span>
+              </div>
+              <div class="nutrient">
+                <span class="nutrient-circle fat-circle"></span>
+                <span th:text="'Fat: ' + ${meal.fat} + 'g'">Fat</span>
+              </div>
+
+              <div class="quantity-control">
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', -1)'"
+                >
+                  -
+                </button>
+                <span th:id="'qty-' + ${meal.id}">0</span>
+                <button
+                  type="button"
+                  th:onclick="'changeQty(' + ${meal.id} + ', 1)'"
+                >
+                  +
+                </button>
+              </div>
+
+              <input type="hidden" name="mealIds" th:value="${meal.id}" />
+              <input
+                type="hidden"
+                th:id="'input-qty-' + ${meal.id}"
+                value="0"
+                name="quantities"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Submit Button -->
+      <div class="submit-order">
+        <button type="submit">Go to Checkout</button>
+      </div>
+    </form>
+
+    <!-- Footer -->
+
+    <!-- Quantity JS -->
+    <script>
+      function changeQty(mealId, delta) {
+        const qtySpan = document.getElementById("qty-" + mealId);
+        const inputQty = document.getElementById("input-qty-" + mealId);
+
+        let currentQty = parseInt(qtySpan.textContent);
+        currentQty += delta;
+        if (currentQty < 0) currentQty = 0;
+
+        qtySpan.textContent = currentQty;
+        inputQty.value = currentQty;
+      }
+    </script>
+  </body>
+</html>

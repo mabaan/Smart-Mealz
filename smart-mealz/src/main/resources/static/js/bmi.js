@@ -90,6 +90,37 @@ function updateHeightValue() {
     
     // Show modal
     openModal('bmi-report-modal');
+      // Fill form fields
+      document.getElementById('bmi-score').value = currentBMI;
+      document.getElementById('bmi-category-hidden').value = currentCategory;
+      
+    
+
+            // Grab BMI value
+            const bmi = document.getElementById('bmi-value').innerText;
+
+            // Grab height and weight
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+    
+            // Now send to the backend
+            fetch('/submit-bmi', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    bmi: bmi,
+                    height: height,
+                    weight: weight
+                })
+            }).then(response => {
+                if (response.ok) {
+                    // alert('BMI submitted successfully!');
+                } else {
+                    alert('Failed to submit BMI.');
+                }
+            });
 }
   
 // Event listeners for BMI calculator
