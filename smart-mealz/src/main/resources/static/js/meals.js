@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Quantity controls
+  // Quantity 
   document.querySelectorAll(".quantity-control").forEach((control) => {
     const minusBtn = control.querySelector(".minus");
     const plusBtn = control.querySelector(".plus");
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ).textContent = `Selected: ${selectedMeals.size} of ${maxMeals} meals`;
   }
 
-  // Global function for removing meals
+  // removing meals
   window.removeMeal = function (mealName) {
     selectedMeals.delete(mealName);
     const checkbox = document

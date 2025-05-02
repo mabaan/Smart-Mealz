@@ -15,12 +15,12 @@ public class MealService {
     @Autowired
     private DataSource dataSource;
 
-    // ✅ 1️⃣ Save meal order for a user
+    // Save meal order for a user
     public void processMealOrder(List<Integer> mealIds, List<Integer> quantities, Long userId) throws SQLException {
 
         try (Connection conn = dataSource.getConnection()) {
     
-            // ✅ Step 1: Check for existing draft order
+            // Check for existing DRAFT order
             String checkOrderSql = "SELECT order_id FROM user_orders WHERE user_id = ? AND status = 'draft' LIMIT 1";
             Integer orderId = null;
     

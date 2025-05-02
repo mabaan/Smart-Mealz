@@ -16,7 +16,7 @@
     <div class="container">
         <div class="checkout-container">
 
-            <!-- ✅ Show form and summary ONLY if not success -->
+            <!-- ONLY if not success -->
             <div th:if="${param.success} == null" class="checkout-container">
 
                 <div class="checkout-form" id="checkoutFormContainer">
@@ -160,11 +160,29 @@
 
             </div> <!-- end if not success -->
 
-            <!-- ✅ Show success only if success -->
-            <div th:if="${param.success} != null" id="successMessage">
+            <!-- Show success only if success -->
+            <div th:if="${param.success} != null" id="successMessage" style="text-align: center;">
+
+                <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                         style="animation: pop 0.5s ease;">
+                        <path d="M20 6L9 17L4 12"></path>
+                    </svg>
+                </div>
+            
                 <h2>Thank you! Your order has been placed successfully.</h2>
                 <a href="/" class="btn">Back to Home</a>
+            
+                <style>
+                    @keyframes pop {
+                        0% { transform: scale(0); opacity: 0; }
+                        60% { transform: scale(1.2); opacity: 1; }
+                        100% { transform: scale(1); }
+                    }
+                </style>
+            
             </div>
+            
 
         </div>
     </div>

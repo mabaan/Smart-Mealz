@@ -15,7 +15,7 @@ public class MealRepository {
     @Autowired
     private DataSource dataSource;
 
-    // Retrieve full details of all meal orders (name, price, quantity)
+    //get full details of all meal orders (name, price, quantity)
     public List<MealOrder> getAllMealOrders() throws SQLException {
         String sql = "SELECT o.order_id, o.meal_id, o.quantity, o.order_date, " +
         "m.name AS meal_name, m.price AS meal_price, m.image_url " +
@@ -46,7 +46,6 @@ public class MealRepository {
         return mealOrders;
     }
 
-    // Optional: Method to save orders directly (alternative to service logic)
     public void saveMealOrder(Integer mealId, Integer quantity) throws SQLException {
         String sql = "INSERT INTO Orders (meal_id, quantity) VALUES (?, ?)";
 

@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const openSignupBtn = document.getElementById('openSignup');
   const navButtons = document.querySelector('.nav-buttons');
 
-  // --- Cookie Check ---
   function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     openLoginBtn?.remove();
     openSignupBtn?.remove();
 
-    // Add account button
     const accountBtn = document.createElement('button');
     accountBtn.id = 'accountBtn';
     accountBtn.className = 'loginandsign';
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
     navButtons.appendChild(accountBtn);
   }
 
-  // --- Modal Openers ---
   document.getElementById('openLogin')?.addEventListener('click', () => {
     loginModal.style.display = 'block';
   });
@@ -38,13 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
     signupModal.style.display = 'block';
   });
 
-  // --- Click outside modal to close ---
+  // outside to close
   window.addEventListener('click', (e) => {
     if (e.target === loginModal) loginModal.style.display = 'none';
     if (e.target === signupModal) signupModal.style.display = 'none';
   });
 
-  // --- Side panel logic ---
+  //Side panel
   document.addEventListener('click', (e) => {
     if (e.target.id === 'accountBtn') {
       sidePanel.classList.toggle('open');
@@ -67,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
   });
 
-  // --- Error message handling ---
+  //Error mesaages
   const params = new URLSearchParams(window.location.search);
   if (params.has('signupError')) {
     alert("This email is already registered.");

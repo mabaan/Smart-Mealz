@@ -51,14 +51,14 @@
           <button class="loginandsign" id="openSignup">Sign Up</button>
           <div id="sidePanel" class="side-panel">
             <div class="side-panel-content">
-              <h3>Your BMI History</h3>
-              <ul id="bmi-history-list">
+              <h3  style="color:#111827; font-size: 20px; border-bottom: 2px solid #10b981; display: inline-block; padding-bottom: 15px;">Your BMI History</h3>
+              <ul style="list-style-type: disc; padding-left: 20px;" id="bmi-history-list">
                 <li th:each="log : ${bmiLogs}"> BMI: <span th:text="${log.bmi}">BMI</span> - Height: <span th:text="${log.height}">Height</span> - Weight: <span th:text="${log.weight}">Weight</span>
                 </li>
               </ul>
               <div class="side-panel-content">
-                <h3>Your Order History</h3>
-                <div th:if="${ordersGroupedByOrderId != null and ordersGroupedByOrderId.isEmpty()}">
+                <h3 style="color:#111827; font-size: 20px; border-bottom: 2px solid #10b981; display: inline-block; padding-bottom: 4px;">Your Order History</h3>
+                <div style="margin-top: 10px; font-weight: bold; font-size: 16px; background-color: #f0fdf4; border: 1px solid #10b981; padding: 8px 12px; border-radius: 8px;" th:if="${ordersGroupedByOrderId != null and ordersGroupedByOrderId.isEmpty()}">
                   <p>No past orders yet.</p>
                 </div>
                 <div th:each="orderGroup : ${ordersGroupedByOrderId}">

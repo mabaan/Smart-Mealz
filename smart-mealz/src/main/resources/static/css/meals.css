@@ -181,3 +181,15 @@ body {
     width: 90%;
   }
 }
+
+.brand{
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  text-decoration: none;
+  position: absolute; /* or 'fixed' if you want it to stay while scrolling */
+  top: 20px;         /* padding from top */
+  left: 20px;        /* padding from left */
+  padding: 10px;     /* internal padding */
+  z-index: 100;
+}
