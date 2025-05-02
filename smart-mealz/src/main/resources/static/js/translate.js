@@ -10,9 +10,9 @@ function googleTranslateElementInit() {
     }, 'google_translate_element');
 
     // Additional fix to prevent Arabic UI
-    if(typeof google !== 'undefined' && google.translate) {
-        google.translate.TranslateService.prototype.getDetectedLanguage = function() {
-          return 'en';
-        };
-    }
+    // if(typeof google !== 'undefined' && google.translate) {
+    //     google.translate.TranslateService.prototype.getDetectedLanguage = function() {
+    //       return 'en';
+    //     };
+    // }
 }

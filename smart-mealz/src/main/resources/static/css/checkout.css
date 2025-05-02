@@ -473,4 +473,32 @@
     .form-section h3 {
       font-size: 18px;
     }
+    
   }
+  .placeOrderBtn{
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.3px;
+  }
+  
+  .placeOrderBtn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .placeOrderBtn:active {
+    transform: translateY(0);
+  }
+

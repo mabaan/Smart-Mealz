@@ -64,13 +64,14 @@ function generateMealPlan() {
     
     // Adjust for dietary preferences
     if (dietaryPreference === 'vegetarian') {
-      breakfastItems = breakfastItems.map(item => item.replace(/chicken|turkey|beef|salmon|meatballs/g, 'tofu'));
-      lunchItems = lunchItems.map(item => item.replace(/chicken|turkey|beef|salmon|meatballs/g, 'tofu'));
-      dinnerItems = dinnerItems.map(item => item.replace(/chicken|turkey|beef|salmon|meatballs/g, 'tofu'));
+      breakfastItems = breakfastItems.map(item => item.replace(/\b(chicken|turkey|beef|salmon|meatballs|steak|burger|curry)\b/gi, 'tofu'));
+
+      lunchItems = lunchItems.map(item => item.replace(/\b(chicken|turkey|beef|salmon|meatballs|steak|burger|curry)\b/gi, 'tofu'));
+      dinnerItems = dinnerItems.map(item => item.replace(/\b(chicken|turkey|beef|salmon|meatballs|steak|burger|curry)\b/gi, 'tofu'));
     } else if (dietaryPreference === 'vegan') {
-      breakfastItems = breakfastItems.map(item => item.replace(/eggs|yogurt|cheese|meat|fish/g, 'plant-based alternatives'));
-      lunchItems = lunchItems.map(item => item.replace(/eggs|yogurt|cheese|meat|fish/g, 'plant-based alternatives'));
-      dinnerItems = dinnerItems.map(item => item.replace(/eggs|yogurt|cheese|meat|fish/g, 'plant-based alternatives'));
+      breakfastItems = breakfastItems.map(item => item.replace(/\b(eggs|yogurt|cheese|meat|fish)\b/gi, 'plant-based alternatives'));
+      lunchItems = lunchItems.map(item => item.replace(/\b(eggs|yogurt|cheese|meat|fish)\b/gi, 'plant-based alternatives'));
+      dinnerItems = dinnerItems.map(item => item.replace(/\b(eggs|yogurt|cheese|meat|fish)\b/gi, 'plant-based alternatives'));
     } else if (dietaryPreference === 'keto') {
       breakfastItems = [
         'Scrambled eggs with avocado and bacon',

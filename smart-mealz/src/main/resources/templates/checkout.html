@@ -1,184 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Meal Plan Service</title>
-    <link rel="stylesheet" href="/css/checkout.css">
-</head>
-<body>
-    <header>
-        <div class="container header-content">
-            <div class="logo">SmartMealz</div>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="checkout-container">
-            <div class="checkout-form" id="checkoutForm">
-                <h2>Checkout</h2>
-                
-                <div class="form-section">
-                    <h3>Personal Information</h3>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" required>
-                        <div class="error" id="emailError"></div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" required>
-                            <div class="error" id="firstNameError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" required>
-                            <div class="error" id="lastNameError"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" required>
-                        <div class="error" id="phoneError"></div>
-                    </div>
-                </div>
-                
-                <div class="form-section">
-                    <h3>Delivery Address</h3>
-                    <div class="form-group">
-                        <label for="address">Street Address</label>
-                        <input type="text" id="address" required>
-                        <div class="error" id="addressError"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="apartment">Apartment, Suite, etc. (optional)</label>
-                        <input type="text" id="apartment">
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" required>
-                            <div class="error" id="cityError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="state">State</label>
-                            <select id="state" required>
-                                <option value="">Select State</option>
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                               
-                                <option value="CA">California</option>
-                                <option value="NY">New York</option>
-                                <option value="TX">Texas</option>
-                            
-                            </select>
-                            <div class="error" id="stateError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="zipCode">ZIP Code</label>
-                            <input type="text" id="zipCode" required>
-                            <div class="error" id="zipCodeError"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-section">
-                    <h3>Payment Information</h3>
-                    <div class="card-icons">
-                        <div class="card-icon">Visa</div>
-                        <div class="card-icon">MC</div>
-                        <div class="card-icon">Amex</div>
-                        <div class="card-icon">Disc</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" required>
-                        <div class="error" id="cardNumberError"></div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="expiryDate">Expiry Date (MM/YY)</label>
-                            <input type="text" id="expiryDate" placeholder="MM/YY" required>
-                            <div class="error" id="expiryDateError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" required>
-                            <div class="error" id="cvvError"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="nameOnCard">Name on Card</label>
-                        <input type="text" id="nameOnCard" required>
-                        <div class="error" id="nameOnCardError"></div>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-block" id="placeOrderBtn">Place Order</button>
-            </div>
-            
-            <div class="order-summary">
-                <h2>Order Summary</h2>
-                
-                <div class="meal-plan-item">
-                    <div class="meal-plan-details">
-                        <div class="meal-plan-name">Weekly Meal Plan (5 meals)</div>
-                        <div class="meal-plan-description">Balanced nutrition, chef-prepared</div>
-                    </div>
-                    <div class="meal-plan-price">$59.95</div>
-                </div>
-                
-                <div class="summary-row">
-                    <div>Subtotal</div>
-                    <div>$59.95</div>
-                </div>
-                
-                <div class="summary-row">
-                    <div>Delivery Fee</div>
-                    <div>$5.99</div>
-                </div>
-                
-                <div class="summary-row">
-                    <div>Tax</div>
-                    <div>$4.80</div>
-                </div>
-                
-                <div class="promo-code">
-                    <input type="text" id="promoCode" placeholder="Promo Code">
-                    <button class="btn btn-secondary" id="applyPromoBtn">Apply</button>
-                </div>
-                
-                <div class="total-row">
-                    <div>Total</div>
-                    <div>$70.74</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="success-message hidden" id="successMessage">
-            <div class="success-icon">✓</div>
-            <h2>Order Successful!</h2>
-            <p>Your order has been placed successfully. You will receive a confirmation email shortly.</p>
-            <button class="btn" id="backToHomeBtn">Back to Home</button>
-        </div>
-    </div>
-    <script th:src="@{/js/checkout.js}"  src="/js/checkout.js"></script>
-
-</body>
-</html> -->
-
-
-<!-- haider -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,171 +15,160 @@
     
     <div class="container">
         <div class="checkout-container">
-            <div class="checkout-form" id="checkoutForm">
-                <h2>Checkout</h2>
-                
-                <div class="form-section">
-                    <h3>Personal Information</h3>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" required>
-                        <div class="error" id="emailError"></div>
+
+            <!-- ✅ Show form and summary ONLY if not success -->
+            <div th:if="${param.success} == null" class="checkout-container">
+
+                <div class="checkout-form" id="checkoutFormContainer">
+                    <h2>Checkout</h2>
+                    
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                            <div class="error" id="emailError"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" required>
+                                <div class="error" id="firstNameError"></div>
+                            </div>
+                            <div class="col form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" required>
+                                <div class="error" id="lastNameError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                            <div class="error" id="phoneError"></div>
+                        </div>
                     </div>
                     
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" required>
-                            <div class="error" id="firstNameError"></div>
+                    <div class="form-section">
+                        <h3>Delivery Address</h3>
+                        <div class="form-group">
+                            <label for="address">Street Address</label>
+                            <input type="text" id="address" required>
+                            <div class="error" id="addressError"></div>
                         </div>
-                        <div class="col form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" required>
-                            <div class="error" id="lastNameError"></div>
+                        
+                        <div class="form-group">
+                            <label for="apartment">Apartment, Suite, etc. (optional)</label>
+                            <input type="text" id="apartment">
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required>
+                                <div class="error" id="cityError"></div>
+                            </div>
+                            <div class="col form-group">
+                                <label for="zipCode">ZIP Code</label>
+                                <input type="text" id="zipCode" required>
+                                <div class="error" id="zipCodeError"></div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" required>
-                        <div class="error" id="phoneError"></div>
+                    <div class="form-section">
+                        <h3>Payment Information</h3>
+                        <div class="card-icons">
+                            <div class="card-icon">Visa</div>
+                            <div class="card-icon">MC</div>
+                            <div class="card-icon">Amex</div>
+                            <div class="card-icon">Disc</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" required>
+                            <div class="error" id="cardNumberError"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="expiryDate">Expiry Date (MM/YY)</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                                <div class="error" id="expiryDateError"></div>
+                            </div>
+                            <div class="col form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" required>
+                                <div class="error" id="cvvError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nameOnCard">Name on Card</label>
+                            <input type="text" id="nameOnCard" required>
+                            <div class="error" id="nameOnCardError"></div>
+                        </div>
+                    </div>
+                    
+                    <form id="checkoutForm" th:action="@{/placeOrder}" method="post">
+                        <button type="submit" class="btn btn-block" id="placeOrderBtn">Place Order</button>
+                    </form>
+                </div>
+
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    
+                    <div class="meal-summary-list">
+                        <div th:each="order : ${orders}" class="meal-plan-item">
+                            <img th:src="${order.imageUrl}" alt="Meal Image" style="width:60px;height:60px;border-radius:6px;object-fit:cover;margin-right:10px;">
+                            <div class="meal-plan-details">
+                                <div class="meal-plan-name" th:text="${order.name}">Meal Name</div>
+                                <div class="meal-quantity" th:text="'Quantity: ' + ${order.quantity}">Quantity</div>
+                                <div class="meal-price" th:text="'Price: AED ' + ${order.price}">Price</div>
+                                <div class="meal-total" th:text="'Total: AED ' + ${order.price * order.quantity}">Total</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <div>Subtotal</div>
+                        <div id="subtotalValue" th:text="'AED ' + ${subtotal}">AED 0.00</div>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <div>Delivery Fee</div>
+                        <div>AED 5.00</div>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <div>VAT (5%)</div>
+                        <div th:text="'AED ' + ${#numbers.formatDecimal(subtotal * 1.05 * 0.05, 1, 2)}">AED 0.00</div>
+                    </div>
+                    
+                    <div class="promo-code">
+                        <input type="text" id="promoCode" placeholder="Promo Code">
+                        <button class="btn btn-secondary" id="applyPromoBtn" type="button">Apply</button>
+                    </div>
+                    
+                    <div class="total-row">
+                        <div>Total</div>
+                        <div th:text="'AED ' + (${subtotal} + 5 + (${subtotal} + 5) * 0.05)">AED 0.00</div>
                     </div>
                 </div>
-                
-                <div class="form-section">
-                    <h3>Delivery Address</h3>
-                    <div class="form-group">
-                        <label for="address">Street Address</label>
-                        <input type="text" id="address" required>
-                        <div class="error" id="addressError"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="apartment">Apartment, Suite, etc. (optional)</label>
-                        <input type="text" id="apartment">
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" required>
-                            <div class="error" id="cityError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="state">State</label>
-                            <select id="state" required>
-                                <option value="">Select State</option>
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                                <!-- Add more states as needed -->
-                                <option value="CA">California</option>
-                                <option value="NY">New York</option>
-                                <option value="TX">Texas</option>
-                                <!-- Other states abbreviated -->
-                            </select>
-                            <div class="error" id="stateError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="zipCode">ZIP Code</label>
-                            <input type="text" id="zipCode" required>
-                            <div class="error" id="zipCodeError"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-section">
-                    <h3>Payment Information</h3>
-                    <div class="card-icons">
-                        <div class="card-icon">Visa</div>
-                        <div class="card-icon">MC</div>
-                        <div class="card-icon">Amex</div>
-                        <div class="card-icon">Disc</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" required>
-                        <div class="error" id="cardNumberError"></div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="expiryDate">Expiry Date (MM/YY)</label>
-                            <input type="text" id="expiryDate" placeholder="MM/YY" required>
-                            <div class="error" id="expiryDateError"></div>
-                        </div>
-                        <div class="col form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" required>
-                            <div class="error" id="cvvError"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="nameOnCard">Name on Card</label>
-                        <input type="text" id="nameOnCard" required>
-                        <div class="error" id="nameOnCardError"></div>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-block" id="placeOrderBtn">Place Order</button>
-                
-            </div>
-            <div id="successMessage" class="hidden">
+
+            </div> <!-- end if not success -->
+
+            <!-- ✅ Show success only if success -->
+            <div th:if="${param.success} != null" id="successMessage">
                 <h2>Thank you! Your order has been placed successfully.</h2>
-                <button id="backToHomeBtn">Back to Home</button>
+                <a href="/" class="btn">Back to Home</a>
             </div>
-            
-            
-            <div class="order-summary">
-                <h2>Order Summary</h2>
-                
-                <div class="meal-summary-list">
-                    <div th:each="order : ${orders}" class="meal-plan-item">
-                        <img th:src="${order.imageUrl}" alt="Meal Image" style="width:60px;height:60px;border-radius:6px;object-fit:cover;margin-right:10px;">
-                        <div class="meal-plan-details">
-                            <div class="meal-plan-name" th:text="${order.name}">Meal Name</div>
-                            <div class="meal-quantity" th:text="'Quantity: ' + ${order.quantity}">Quantity</div>
-                            <div class="meal-price" th:text="'Price: AED ' + ${order.price}">Price</div>
-                            <div class="meal-total" th:text="'Total: AED ' + ${order.price * order.quantity}">Total</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="summary-row">
-                    <div>Subtotal</div>
-                    <div id="subtotalValue" th:text="'AED ' + ${subtotal}">AED 0.00</div>
-                </div>
-                
-                
-                <div class="summary-row">
-                    <div>Delivery Fee</div>
-                    <div>AED 5.00</div>
-                </div>
-                
-                <div class="summary-row">
-                    <div>VAT (5%)</div>
-                    <div th:text="'AED ' + ${#numbers.formatDecimal(subtotal * 1.05 * 0.05, 1, 2)}">AED 0.00</div>
-                </div>
-                
-                <div class="promo-code">
-                    <input type="text" id="promoCode" placeholder="Promo Code">
-                    <button class="btn btn-secondary" id="applyPromoBtn" type="button">Apply</button>
-                </div>
-                
-                <div class="total-row">
-                    <div>Total</div>
-                    <div th:text="'AED ' + (${subtotal} + 5 + (${subtotal} + 5) * 0.05)">AED 0.00</div>
-                </div>
-                
-        <div class="success-message hidden" id="successMessage">
-            <div class="success-icon">✓</div>
-            <h2>Order Successful!</h2>
-            <p>Your order has been placed successfully. You will receive a confirmation email shortly.</p>
-            <button class="btn" id="backToHomeBtn">Back to Home</button>
+
         </div>
     </div>
+
     <script src="/js/checkout.js"></script>
 </body>
 </html>

@@ -124,7 +124,10 @@ function updateHeightValue() {
 }
   
 // Event listeners for BMI calculator
-document.getElementById('height').addEventListener('input', updateHeightValue);
-document.getElementById('weight').addEventListener('input', updateWeightValue);
-document.getElementById('submit-bmi').addEventListener('click', submitBMI);
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById('height').addEventListener('input', updateHeightValue);
+  document.getElementById('weight').addEventListener('input', updateWeightValue);
+  document.getElementById('submit-bmi').addEventListener('click', submitBMI);
+});
+
 

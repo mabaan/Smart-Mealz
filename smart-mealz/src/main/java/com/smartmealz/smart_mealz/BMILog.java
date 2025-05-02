@@ -1,15 +1,10 @@
 package com.smartmealz.smart_mealz;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 public class BMILog {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private int age;
     private String gender;
     private double height;
@@ -17,12 +12,18 @@ public class BMILog {
     private double bmi;
     private String category;
     private int recommendedCalories;
-
     private LocalDateTime timestamp = LocalDateTime.now();
+    private Long userId;  // Just store user ID
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    // Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getAge() {
         return age;
@@ -88,13 +89,11 @@ public class BMILog {
         this.timestamp = timestamp;
     }
     
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
     
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
-    
-
 }

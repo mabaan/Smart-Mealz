@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,17 +28,50 @@ public class PageController {
     private MealService mealService;
 
     // ✅ 1️⃣ Home page
-    @GetMapping("/")
-    public String home(@CookieValue(value = "user_id", defaultValue = "-1") String userId,
-                       Model model) {
+    // @GetMapping("/")
+    // public String home(@CookieValue(value = "user_id", defaultValue = "-1") String userId,
+    //                    Model model) {
 
-        if (!userId.equals("-1")) {
-            List<Map<String, Object>> bmiLogs = bmiService.getUserBmiLogs(userId);
+    //     if (!userId.equals("-1")) {
+    //         List<Map<String, Object>> bmiLogs = bmiService.getUserBmiLogs(userId);
+    //         model.addAttribute("bmiLogs", bmiLogs);
+    //     }
+
+    //     return "home";
+    // }
+    @GetMapping("/")
+    public String home(@CookieValue(value = "user_id", defaultValue = "-1") String userIdString,
+                   Model model) {
+
+        Long userId = Long.parseLong(userIdString);
+
+        if (!userId.equals(-1L)) {
+
+            // BMI logs
+            List<Map<String, Object>> bmiLogs = bmiService.getUserBmiLogs(userIdString);
             model.addAttribute("bmiLogs", bmiLogs);
+
+            // Orders
+            try {
+                List<MealOrder> orders = mealService.getCompletedOrders(userId);
+
+                // Group orders by order_id
+                Map<Integer, List<MealOrder>> ordersGroupedByOrderId = new HashMap<>();
+                for (MealOrder order : orders) {
+                    ordersGroupedByOrderId.computeIfAbsent(order.getOrderId(), k -> new ArrayList<>()).add(order);
+                }
+
+                model.addAttribute("ordersGroupedByOrderId", ordersGroupedByOrderId);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                model.addAttribute("ordersGroupedByOrderId", new HashMap<>());
+            }
         }
 
         return "home";
     }
+
 
     // ✅ 2️⃣ Meals page
     @GetMapping("/meals")
@@ -74,39 +108,50 @@ public class PageController {
     // ✅ 3️⃣ Submit selected meals
     @PostMapping("/submitMeals")
     public String submitMeals(@RequestParam("mealIds") List<Integer> mealIds,
-                              @RequestParam("quantities") List<Integer> quantities) {
-
+                              @RequestParam("quantities") List<Integer> quantities,
+                              @CookieValue(value = "user_id", defaultValue = "-1") Long userId) {
+    
         try {
-            mealService.processMealOrder(mealIds, quantities);
+            mealService.processMealOrder(mealIds, quantities, userId);
         } catch (SQLException e) {
             e.printStackTrace();
             return "redirect:/meals?error";
         }
-
+    
         return "redirect:/checkout";
     }
+    
 
     // ✅ 4️⃣ Checkout page with order summary
     @GetMapping("/checkout")
-    public String checkout(Model model) {
-
+    public String checkout(@CookieValue(value = "user_id", defaultValue = "-1") String userIdString,
+                           Model model) {
+    
+        Long userId = Long.parseLong(userIdString);
+    
         try {
-            List<MealOrder> orderSummary = mealService.getOrderSummary();
+            List<MealOrder> orderSummary = mealService.getOrderSummary(userId);
             model.addAttribute("orders", orderSummary);
-
+    
             // Calculate subtotal
             double subtotal = 0.0;
             for (MealOrder order : orderSummary) {
                 subtotal += order.getPrice() * order.getQuantity();
             }
             model.addAttribute("subtotal", subtotal);
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
             model.addAttribute("orders", new ArrayList<MealOrder>());
             model.addAttribute("subtotal", 0.0);
         }
-
+    
         return "checkout";
     }
+
+    @GetMapping("/bodyassessment")          // <-- URL user clicks
+    public String bodyassessment() {
+        return "bodyassessment";            // <-- templates/bodyassessment.html
+    }
+    
 }

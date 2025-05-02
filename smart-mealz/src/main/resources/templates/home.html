@@ -1,374 +1,354 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SmartMealz – Healthy Meal Plans</title>
-
-  <!-- main stylesheet -->
-  <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css"/>
-
-  <!-- jQuery (CDN) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-<!-- Page Loading -->
-<div class="loader-wrapper">
-  <span class="loader"><span class="loader-inner"></span></span>
-</div>
-
-<!-- Top Offer Bar -->
-<div id="start">
-  <p>
-    15% OFF any meal plan –
-    <a th:href="@{/selectplan}" href="/selectplan" class="start-link">Start Now</a>
-  </p>
-</div>
-
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <a th:href="@{/}" href="/" class="navbar-brand">SMARTMEALZ</a>
-
-    <!-- Hamburger menu for mobile -->
-    <button class="hamburger">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-
-    <div class="navbar-menu">
-      <ul class="nav-links">
-        <li><a th:href="@{/}" href="/">Home</a></li>
-        <li><a th:href="@{/bodyassessment}" href="/bodyassessment">Body Assessment</a></li>
-        <!-- <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li> -->
-        <li><a th:href="@{/selectplan}" href="/selectplan">Select Meals</a></li>
-        <li><a th:href="@{/checkout}" href="/checkout">Checkout</a></li>
-      </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartMealz – Healthy Meal Plans</title>
+    <!-- main stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" />
+    <!-- jQuery (CDN) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Page Loading -->
+    <div class="loader-wrapper">
+      <span class="loader">
+        <span class="loader-inner"></span>
+      </span>
     </div>
-
-    <div class="nav-buttons">
-      <!-- <a href="#" class="login-link">Log in</a> -->
-      <button class="loginandsign" id="openLogin">Login</button>
-      <button class="loginandsign" id="openSignup">Sign Up</button>
-    
-      <div id="sidePanel" class="side-panel">
-        <div class="side-panel-content">
-          <h3>Your BMI History</h3>
-          <ul id="bmi-history-list">
-            <li th:each="log : ${bmiLogs}">
-              BMI: <span th:text="${log.bmi}">BMI</span>
-              - Height: <span th:text="${log.height}">Height</span>
-              - Weight: <span th:text="${log.weight}">Weight</span>
+    <!-- Top Offer Bar -->
+    <div id="start">
+      <p> 10% OFF any meal plan – <a th:href="@{/meals}" href="/meals" class="start-link">Start Now</a>
+      </p>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a th:href="@{/}" href="/" class="navbar-brand">SMARTMEALZ</a>
+        <!-- Hamburger menu for mobile -->
+        <button class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        <div class="navbar-menu">
+          <ul class="nav-links">
+            <li>
+              <a th:href="@{/}" href="/">Home</a>
+            </li>
+            <li>
+              <a th:href="@{/bodyassessment}" href="/bodyassessment">Body Assessment</a>
+            </li>
+            <!-- <li><a th:href="@{/customize}" href="/customize">Customize Plan</a></li> -->
+            <li>
+              <a th:href="@{/meals}" href="/meals">Select Meals</a>
             </li>
           </ul>
-    
-          <button id="deleteAccountBtn">Delete Account</button>
-          <button id="signOutBtn">Sign Out</button>
+        </div>
+        <div class="nav-buttons">
+          <!-- <a href="#" class="login-link">Log in</a> -->
+          <button class="loginandsign" id="openLogin">Login</button>
+          <button class="loginandsign" id="openSignup">Sign Up</button>
+          <div id="sidePanel" class="side-panel">
+            <div class="side-panel-content">
+              <h3>Your BMI History</h3>
+              <ul id="bmi-history-list">
+                <li th:each="log : ${bmiLogs}"> BMI: <span th:text="${log.bmi}">BMI</span> - Height: <span th:text="${log.height}">Height</span> - Weight: <span th:text="${log.weight}">Weight</span>
+                </li>
+              </ul>
+              <div class="side-panel-content">
+                <h3>Your Order History</h3>
+                <div th:if="${ordersGroupedByOrderId != null and ordersGroupedByOrderId.isEmpty()}">
+                  <p>No past orders yet.</p>
+                </div>
+                <div th:each="orderGroup : ${ordersGroupedByOrderId}">
+                  <div class="order-header" 
+                      th:onclick="'toggleOrderDetails(\'order-' + ${orderGroup.key} + '\')'">
+                    Order #<span th:text="${orderGroup.key}">Order ID</span>
+                    <span class="order-date">(Placed on: 
+                        <span th:text="${orderGroup.value[0].orderDate != null ? #dates.format(orderGroup.value[0].orderDate, 'yyyy-MM-dd') : 'Unknown date'}"></span>)
+                    </span>
+                  </div>
+             
+                  <div class="order-details hidden" th:id="'order-' + ${orderGroup.key}">
+                    <ul>
+                        <li th:each="meal : ${orderGroup.value}">
+                            <img th:src="${meal.imageUrl}" alt="Meal Image" width="30">
+                            <span th:text="${meal.name}">Meal Name</span> - 
+                            Qty: <span th:text="${meal.quantity}"></span>
+                        </li>
+                    </ul>
+                  </div>
+                
+                </div>
+              </div>
+              <button id="deleteAccountBtn">Delete Account</button>
+              <button id="signOutBtn">Sign Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="loginModal" class="modal">
+      <div class="card">
+        <div class="card-header">
+          <h2>Login</h2>
+        </div>
+        <div class="card-body">
+          <form action="/login" method="post">
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" name="password" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="login-button">Login</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    
-    
-      
-  </div>
-</nav>
-
-<div id="loginModal" class="modal">
-  <div class="card">
-    <div class="card-header">
-      <h2>Login</h2>
-    </div>
-    <div class="card-body">
-      <form action="/login" method="post">
-        <div class="form-group">
-          <label for="login-email">Email</label>
-          <input type="email" id="login-email" name="email" required>
+    <div id="signupModal" class="modal">
+      <div class="card">
+        <div class="card-header">
+          <h2>Sign Up</h2>
         </div>
-        <div class="form-group">
-          <label for="login-password">Password</label>
-          <input type="password" id="login-password" name="password" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="login-button">Login</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div id="signupModal" class="modal">
-  <div class="card">
-    <div class="card-header">
-      <h2>Sign Up</h2>
-    </div>
-    <div class="card-body">
-      <form action="/signup" method="post">
-        <div class="form-group">
-          <label for="signup-email">Email</label>
-          <input type="email" id="signup-email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="signup-password">Password</label>
-          <input type="password" id="signup-password" name="password" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="login-button">Sign Up</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<!-- Hero Section -->
-<header class="hero">
-  <div class="hero-content">
-    <h1>Struggling to find the perfect meal plan?</h1>
-    <p>
-      You're not alone! Eating healthy shouldn't be complicated. SmartMealz takes the
-      guesswork out of nutrition by recommending personalized meal plans tailored to your goals.
-      Whether you're aiming to lose weight, build muscle, or eat balanced meals, we’ve got you covered.
-      Smart choices. Smarter meals. SmartMealz.
-    </p>
-    <button class="cta-button">Choose my meal plan</button>
-  </div>
-
-  <div class="hero-image">
-    <img 
-         src="/css/img/Smart_Meal_Planner_Launch_Header.png"
-         alt="Healthy Meal Plans"/>
-  </div>
-</header>
-
-<!-- About Us -->
-<section class="about-us">
-  <div class="about-container">
-    <div class="about-image">
-      <img  src="/css/img/healthyfoodplate.jpg" alt="Healthy Food Plate"/>
-    </div>
-
-    <div class="about-content">
-      <h3 class="about-title">About Us</h3>
-      <h2 class="about-heading">Healthy &amp; Tasty Foods<br/>With Natural Ingredients</h2>
-      <p class="about-text">
-        Cooking up made-to-order meal plans to help you look and feel fantastic! Choose from thousands
-        of meal combinations and get healthy, nutritious, and delicious meals delivered straight to
-        your door.
-      </p>
-
-      <div class="stats">
-        <div class="stat"><h2>2K+</h2><p>Member Active</p></div>
-        <div class="stat"><h2>10K+</h2><p>Happy Clients</p></div>
-        <div class="stat"><h2>35+</h2><p>Award Winning</p></div>
-      </div>
-
-      <a href="#" class="read-more-btn">Read More →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Upper wave SVG -->
-<svg id="svg1" viewBox="0 0 1440 390" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150">
- 
-  <path d="M 0,400 L 0,100 C 105.07142857142858,108.35714285714286 210.14285714285717,116.71428571428571 328,109 C 445.85714285714283,101.28571428571429 576.5,77.5 703,79 C 829.5,80.5 951.8571428571429,107.28571428571429 1074,115 C 1196.142857142857,122.71428571428571 1318.0714285714284,111.35714285714286 1440,100 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="0.53" class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
-
-  <path d="M 0,400 L 0,233 C 121,257.07142857142856 242,281.1428571428571 371,265 C 500,248.85714285714286 637,192.5 770,193 C 903,193.5 1032,250.8571428571429 1143,267 C 1254,283.1428571428571 1347,258.07142857142856 1440,233 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
-
-</svg>
-
-<!-- Meals Provided -->
-<section class="meals-provided">
-  <h1 class="meals-title">The Meals We Provide</h1>
-
-  <div class="card-meals-container">
-    <!-- Meal card 1 -->
-    <div class="meal-card">
-      <img src="https://www.dinneratthezoo.com/wp-content/uploads/2020/12/grilled-chicken-salad-4.jpg"
-           alt="Grilled Chicken Salad">
-      <h3>Grilled Chicken Salad</h3>
-      <p>A delicious and healthy mix of grilled chicken, fresh veggies, and vinaigrette.</p>
-      <button class="meal-btn">View Details</button>
-    </div>
-
-    <!-- Meal card 2 -->
-    <div class="meal-card">
-      <img src="https://www.fitmittenkitchen.com/wp-content/uploads/2021/06/Southwest-Quinoa-Power-Bowl-Recipe-1.jpg"
-           alt="Quinoa Power Bowl">
-      <h3>Quinoa Power Bowl</h3>
-      <p>Loaded with quinoa, avocado, and protein-dense chickpeas.</p>
-      <button class="meal-btn">View Details</button>
-    </div>
-
-    <!-- Meal card 3 -->
-    <div class="meal-card">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgrzPhAr8tIK_x89gIFWZYFIsNYWOGek_t7g&s"
-           alt="Salmon & Greens">
-      <h3>Salmon &amp; Greens</h3>
-      <p>Perfectly baked salmon served with fresh greens and a lemon dressing.</p>
-      <button class="meal-btn">View Details</button>
-    </div>
-
-    <!-- Meal card 4 -->
-    <div class="meal-card">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwrgUNwwLS8mctCl3_ynMWVT16JNHOgid1A&s"
-           alt="Vegan Buddha Bowl">
-      <h3>Vegan Buddha Bowl</h3>
-      <p>A colorful bowl packed with plant-based protein and fresh ingredients.</p>
-      <button class="meal-btn">View Details</button>
-    </div>
-  </div>
-
-  <h1 class="meals-bottom-msg">And Much More!</h1>
-</section>
-
-<!--Lower Wave Part-->
- 
-<svg id="svg2" viewBox="0 0 1440 390" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150">
- 
-  <path d="M 0,400 L 0,100 C 104.14285714285714,92.71428571428572 208.28571428571428,85.42857142857143 326,77 C 443.7142857142857,68.57142857142857 574.9999999999999,58.999999999999986 718,72 C 861.0000000000001,85.00000000000001 1015.7142857142858,120.57142857142858 1138,129 C 1260.2857142857142,137.42857142857142 1350.142857142857,118.71428571428571 1440,100 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="0.53" class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 200)"></path>
-
-  <path d="M 0,400 L 0,233 C 105.67857142857142,207.92857142857144 211.35714285714283,182.85714285714286 350,187 C 488.64285714285717,191.14285714285714 660.2500000000001,224.5 771,245 C 881.7499999999999,265.5 931.6428571428571,273.1428571428571 1033,269 C 1134.357142857143,264.8571428571429 1287.1785714285716,248.92857142857144 1440,233 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-1" transform="rotate(-180 720 200)"></path>
-
-</svg>
-
-<!-- Body Assessment -->
-<section class="body-assessment">
-  <div class="body-assessment-container">
-    <div class="assessment-text">
-      <h1>Unlock Your Ideal Meal Plan</h1>
-      <p>
-        Take our quick body assessment and get a personalized meal suggestion tailored to your fitness goals.
-        Our advanced tools help you track progress and stay on top of your health.
-      </p>
-
-      <div class="assessment-features">
-        <div class="feature-card">
-          <img src="/css/img/bmi_calculator.webp" alt="BMI Icon">
-          <h3>BMI Calculator</h3>
-          <p>Understand your body composition and track progress.</p>
-        </div>
-        <div class="feature-card">
-          <img src="/css/img/calorie_tracker.png" alt="Calorie Tracker Icon">
-          <h3>Calorie Tracker</h3>
-          <p>Monitor your daily intake for better health.</p>
-        </div>
-        <div class="feature-card">
-          <img src="/css/img/personalized_meal_plan.png" alt="Meal Plan Icon">
-          <h3>Personalized Meal Suggestion</h3>
-          <p>Designed for your fitness and nutrition goals.</p>
+        <div class="card-body">
+          <form action="/signup" method="post">
+            <div class="form-group">
+              <label for="signup-email">Email</label>
+              <input type="email" id="signup-email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" name="password" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="login-button">Sign Up</button>
+            </div>
+          </form>
         </div>
       </div>
-
-      <a th:href="@{/bodyassessment}" href="/bodyassessment">
-        <button class="assessment-btn">Start My Assessment</button>
-      </a>
     </div>
-
-    <div class="assessment-image">
-      <img src="/css/img/body_assessment_img.avif"
-           alt="Body Assessment Illustration"/>
-    </div>
-  </div>
-</section>
-
-<!-- SmartMealz Fit -->
-<section class="smartmealz-fit">
-  <div class="fit-container">
-    <div class="fit-image">
-      <img src="/css/img/smartmealz_fit.jpg" alt="SmartMealz Fit Device"/>
-    </div>
-
-    <div class="fit-content">
-      <h2>Introducing SmartMealz Fit</h2>
-      <p>
-        The SmartMealz Fit is a state-of-the-art fitness tracker that wraps around your hand to monitor your health in
-        real time. With features like heart rate tracking, stress detection, step tracking, exercise detection, excessive
-        sweating alerts, and calorie tracking, SmartMealz Fit helps you stay on top of your health and fitness goals.
-      </p>
-      <ul>
-        <li>Heart Rate &amp; Stress Level Monitoring</li>
-        <li>Step Count &amp; Walking Speed Detection</li>
-        <li>Exercise &amp; Calorie Burn Tracking</li>
-        <li>Hydration Alerts for Excessive Sweating</li>
-        <li>Sleep Duration &amp; Quality Tracking</li>
-        <li>Next Meal Reminder &amp; Optimization</li>
-      </ul>
-      <button class="fit-btn">Learn More</button>
-    </div>
-  </div>
-</section>
-
-<!-- Motivational Quote -->
-<section class="motivational-quote">
-  <div class="quote-container">
-    <p class="quote-text">
-      "The food you eat can be either the safest and most powerful form of medicine or the slowest form of poison."
-    </p>
-    <p class="quote-author">– Ann Wigmore</p>
-  </div>
-</section>
-
-<!-- Top Button -->
-<button class="top" onclick="scrollToTop()">
-  <img class="top-image" src="/css/img/up-arrow.png" alt="up arrow">
-  <h3 style="margin-top:10px;">Top</h3>
-</button>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-main">
-      <div class="newsletter-section">
-        <h2>New recipes and news in your inbox every month!</h2>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Enter your email" class="newsletter-input"/>
-          <button class="subscribe-button">Subscribe today</button>
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Struggling to find the perfect meal plan?</h1>
+        <p> You're not alone! Eating healthy shouldn't be complicated. SmartMealz takes the guesswork out of nutrition by recommending personalized meal plans tailored to your goals. Whether you're aiming to lose weight, build muscle, or eat balanced meals, we’ve got you covered. Smart choices. Smarter meals. SmartMealz. </p>
+        <button class="cta-button">Choose my meal plan</button>
+      </div>
+      <div class="hero-image">
+        <img src="/img/Smart_Meal_Planner_Launch_Header.png" alt="Healthy Meal Plans" />
+      </div>
+    </header>
+    <!-- About Us -->
+    <section class="about-us">
+      <div class="about-container">
+        <div class="about-image">
+          <img src="/img/healthyfoodplate.jpg" alt="Healthy Food Plate" />
+        </div>
+        <div class="about-content">
+          <h3 class="about-title">About Us</h3>
+          <h2 class="about-heading">Healthy &amp; Tasty Foods <br />With Natural Ingredients </h2>
+          <p class="about-text"> Cooking up made-to-order meal plans to help you look and feel fantastic! Choose from thousands of meal combinations and get healthy, nutritious, and delicious meals delivered straight to your door. </p>
+          <div class="stats">
+            <div class="stat">
+              <h2>2K+</h2>
+              <p>Member Active</p>
+            </div>
+            <div class="stat">
+              <h2>10K+</h2>
+              <p>Happy Clients</p>
+            </div>
+            <div class="stat">
+              <h2>35+</h2>
+              <p>Award Winning</p>
+            </div>
+          </div>
+          <a href="#" class="read-more-btn">Read More →</a>
         </div>
       </div>
-
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About SmartMealz</h3>
-          <ul class="footer-links">
-            <li><a href="/">Who We Are</a></li>
-            <li><a href="/">Our Mission</a></li>
-            <li><a href="/">How It Works</a></li>
+    </section>
+    <!-- Upper wave SVG -->
+    <svg id="svg1" viewBox="0 0 1440 390" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150">
+      <path d="M 0,400 L 0,100 C 105.07142857142858,108.35714285714286 210.14285714285717,116.71428571428571 328,109 C 445.85714285714283,101.28571428571429 576.5,77.5 703,79 C 829.5,80.5 951.8571428571429,107.28571428571429 1074,115 C 1196.142857142857,122.71428571428571 1318.0714285714284,111.35714285714286 1440,100 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="0.53" class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
+      <path d="M 0,400 L 0,233 C 121,257.07142857142856 242,281.1428571428571 371,265 C 500,248.85714285714286 637,192.5 770,193 C 903,193.5 1032,250.8571428571429 1143,267 C 1254,283.1428571428571 1347,258.07142857142856 1440,233 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
+    </svg>
+    <!-- Meals Provided -->
+    <section class="meals-provided">
+      <h1 class="meals-title">The Meals We Provide</h1>
+      <div class="card-meals-container">
+        <!-- Meal card 1 -->
+        <div class="meal-card">
+          <img src="https://www.dinneratthezoo.com/wp-content/uploads/2020/12/grilled-chicken-salad-4.jpg" alt="Grilled Chicken Salad">
+          <h3>Grilled Chicken Salad</h3>
+          <p>A delicious and healthy mix of grilled chicken, fresh veggies, and vinaigrette.</p>
+          <button class="meal-btn">View Details</button>
+        </div>
+        <!-- Meal card 2 -->
+        <div class="meal-card">
+          <img src="https://www.fitmittenkitchen.com/wp-content/uploads/2021/06/Southwest-Quinoa-Power-Bowl-Recipe-1.jpg" alt="Quinoa Power Bowl">
+          <h3>Quinoa Power Bowl</h3>
+          <p>Loaded with quinoa, avocado, and protein-dense chickpeas.</p>
+          <button class="meal-btn">View Details</button>
+        </div>
+        <!-- Meal card 3 -->
+        <div class="meal-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgrzPhAr8tIK_x89gIFWZYFIsNYWOGek_t7g&s" alt="Salmon & Greens">
+          <h3>Salmon &amp; Greens</h3>
+          <p>Perfectly baked salmon served with fresh greens and a lemon dressing.</p>
+          <button class="meal-btn">View Details</button>
+        </div>
+        <!-- Meal card 4 -->
+        <div class="meal-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLwrgUNwwLS8mctCl3_ynMWVT16JNHOgid1A&s" alt="Vegan Buddha Bowl">
+          <h3>Vegan Buddha Bowl</h3>
+          <p>A colorful bowl packed with plant-based protein and fresh ingredients.</p>
+          <button class="meal-btn">View Details</button>
+        </div>
+      </div>
+      <h1 class="meals-bottom-msg">And Much More!</h1>
+    </section>
+    <!--Lower Wave Part-->
+    <svg id="svg2" viewBox="0 0 1440 390" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150">
+      <path d="M 0,400 L 0,100 C 104.14285714285714,92.71428571428572 208.28571428571428,85.42857142857143 326,77 C 443.7142857142857,68.57142857142857 574.9999999999999,58.999999999999986 718,72 C 861.0000000000001,85.00000000000001 1015.7142857142858,120.57142857142858 1138,129 C 1260.2857142857142,137.42857142857142 1350.142857142857,118.71428571428571 1440,100 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="0.53" class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 200)"></path>
+      <path d="M 0,400 L 0,233 C 105.67857142857142,207.92857142857144 211.35714285714283,182.85714285714286 350,187 C 488.64285714285717,191.14285714285714 660.2500000000001,224.5 771,245 C 881.7499999999999,265.5 931.6428571428571,273.1428571428571 1033,269 C 1134.357142857143,264.8571428571429 1287.1785714285716,248.92857142857144 1440,233 L 1440,400 L 0,400 Z" stroke="none" stroke-width="0" fill="#a3d1c6" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-1" transform="rotate(-180 720 200)"></path>
+    </svg>
+    <!-- Body Assessment -->
+    <section class="body-assessment">
+      <div class="body-assessment-container">
+        <div class="assessment-text">
+          <h1>Unlock Your Ideal Meal Plan</h1>
+          <p> Take our quick body assessment and get a personalized meal suggestion tailored to your fitness goals. Our advanced tools help you track progress and stay on top of your health. </p>
+          <div class="assessment-features">
+            <div class="feature-card">
+              <img src="/img/bmi_calculator.webp" alt="BMI Icon">
+              <h3>BMI Calculator</h3>
+              <p>Understand your body composition and track progress.</p>
+            </div>
+            <div class="feature-card">
+              <img src="/img/calorie_tracker.png" alt="Calorie Tracker Icon">
+              <h3>Calorie Tracker</h3>
+              <p>Monitor your daily intake for better health.</p>
+            </div>
+            <div class="feature-card">
+              <img src="/img/personalized_meal_plan.png" alt="Meal Plan Icon">
+              <h3>Personalized Meal Suggestion</h3>
+              <p>Designed for your fitness and nutrition goals.</p>
+            </div>
+          </div>
+          <a th:href="@{/bodyassessment}" href="/bodyassessment">
+            <button class="assessment-btn">Start My Assessment</button>
+          </a>
+        </div>
+        <div class="assessment-image">
+          <img src="/img/body_assessment_img.avif" alt="Body Assessment Illustration" />
+        </div>
+      </div>
+    </section>
+    <!-- SmartMealz Fit -->
+    <section class="smartmealz-fit">
+      <div class="fit-container">
+        <div class="fit-image">
+          <img src="/img/smartmealz_fit.jpg" alt="SmartMealz Fit Device" />
+        </div>
+        <div class="fit-content">
+          <h2>Introducing SmartMealz Fit</h2>
+          <p> The SmartMealz Fit is a state-of-the-art fitness tracker that wraps around your hand to monitor your health in real time. With features like heart rate tracking, stress detection, step tracking, exercise detection, excessive sweating alerts, and calorie tracking, SmartMealz Fit helps you stay on top of your health and fitness goals. </p>
+          <ul>
+            <li>Heart Rate &amp; Stress Level Monitoring</li>
+            <li>Step Count &amp; Walking Speed Detection</li>
+            <li>Exercise &amp; Calorie Burn Tracking</li>
+            <li>Hydration Alerts for Excessive Sweating</li>
+            <li>Sleep Duration &amp; Quality Tracking</li>
+            <li>Next Meal Reminder &amp; Optimization</li>
           </ul>
-        </div>
-
-        <div class="footer-section">
-          <h3>Our Services</h3>
-          <ul class="footer-links">
-            <li><a href="/">Meal Plans</a></li>
-            <li><a href="/">Nutrition Guide</a></li>
-          </ul>
+          <button class="fit-btn">Learn More</button>
         </div>
       </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <p class="copyright">© 2025 SmartMealz. All rights reserved.</p>
-        <div class="translate-container">
-          <div id="google_translate_element"></div>
+    </section>
+    <!-- Motivational Quote -->
+    <section class="motivational-quote">
+      <div class="quote-container">
+        <p class="quote-text"> "The food you eat can be either the safest and most powerful form of medicine or the slowest form of poison." </p>
+        <p class="quote-author">– Ann Wigmore</p>
+      </div>
+    </section>
+    <!-- Top Button -->
+    <button class="top" onclick="scrollToTop()">
+      <img class="top-image" src="/img/up-arrow.png" alt="up arrow">
+      <h3 style="margin-top:10px;">Top</h3>
+    </button>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-main">
+          <div class="newsletter-section">
+            <h2>New recipes and news in your inbox every month!</h2>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Enter your email" class="newsletter-input" />
+              <button class="subscribe-button">Subscribe today</button>
+            </div>
+          </div>
+          <div class="footer-content">
+            <div class="footer-section">
+              <h3>About SmartMealz</h3>
+              <ul class="footer-links">
+                <li>
+                  <a href="/">Who We Are</a>
+                </li>
+                <li>
+                  <a href="/">Our Mission</a>
+                </li>
+                <li>
+                  <a href="/">How It Works</a>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <h3>Our Services</h3>
+              <ul class="footer-links">
+                <li>
+                  <a href="/meals">Meal Plans</a>
+                </li>
+                <li>
+                  <a href="/bodyassessment">Nutrition Guide</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-bottom-content">
+            <p class="copyright">© 2025 SmartMealz. All rights reserved.</p>
+            <div class="translate-container">
+              <div id="google_translate_element"></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
+    <!-- JS -->
+    <script th:src="@{/js/pageload.js}" src="/js/pageload.js"></script>
+    <script th:src="@{/js/hamburger.js}" src="/js/hamburger.js"></script>
+    <script th:src="@{/js/home.js}" src="/js/home.js"></script>
+    <script th:src="@{/js/backtotop.js}" src="/js/backtotop.js"></script>
+    <script th:src="@{/js/translate.js}" src="/js/translate.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&hl=en"></script>
 
-<!-- JS -->
-<script th:src="@{/js/pageload.js}"    src="/js/pageload.js"></script>
-<script th:src="@{/js/hamburger.js}"  src="/js/hamburger.js"></script>
-<script th:src="@{/js/home.js}"       src="/js/home.js"></script>
-<script th:src="@{/js/backtotop.js}"  src="/js/backtotop.js"></script>
-<script th:src="@{/js/translate.js}"  src="/js/translate.js"></script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script th:src="@{/js/login.js}"  src="/js/login.js"></script>
-
-
-
-
-</body>
+    <script th:src="@{/js/login.js}" src="/js/login.js"></script>
+    <script>
+      function toggleOrderDetails(orderId) {
+        const details = document.getElementById(orderId);
+        if (details.classList.contains("hidden")) {
+          details.classList.remove("hidden");
+        } else {
+          details.classList.add("hidden");
+        }
+      }
+    </script>
+  </body>
 </html>
