@@ -105,7 +105,7 @@ mvn spring-boot:run\ </code></pre>
 </ol>
 
 ## License
-<p>Distributed under the MIT License. See <a href="LICENSE">LICENSE</a> for more information.</p>
+<p>Distributed under the MIT License. See <a href="https://github.com/mabaan/Smart-Mealz/blob/main/LICENSE">LICENSE</a> for more information.</p>
 
 ## Contact
 👤Mohammed Abaan: <br>
